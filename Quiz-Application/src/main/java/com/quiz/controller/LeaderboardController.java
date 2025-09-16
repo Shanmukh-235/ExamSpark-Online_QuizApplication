@@ -1,8 +1,10 @@
 package com.quiz.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import com.quiz.entity.User;
 import com.quiz.entity.dto.LeaderboardDTO;
 import com.quiz.repo.LeaderboardRepository;
 import com.quiz.repo.QuizRepository;
+import com.quiz.repo.ResultRepository;
 import com.quiz.repo.UserRepository;
 
 @RestController
@@ -72,6 +75,25 @@ public class LeaderboardController {
     record.setScore(score);
     record.setTotalMarks(totalMarks);
     return leaderboardRepository.save(record);
+
 }
+ @Autowired
+    private ResultRepository resultRepository;
+
+    @GetMapping("/leaderboard")
+    public String leaderboard(Model model) {
+        List<Object[]> leaderboardData = resultRepository.getLeaderboard();
+
+        List<LeaderboardDTO> leaderboard = new ArrayList<>();
+        for (Object[] row : leaderboardData) {
+            User user = (User) row[0];
+            Long totalScore = (Long) row[1]; // SUM returns Long
+
+            leaderboard.add(new LeaderboardDTO(user.getUsername(), totalScore));
+        }
+
+        model.addAttribute("leaderboard", leaderboard);
+        return "leaderboard";
+    }
 
 }

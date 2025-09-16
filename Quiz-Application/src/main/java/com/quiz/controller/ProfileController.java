@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.quiz.entity.Result;
 import com.quiz.entity.User;
 import com.quiz.repo.ResultRepository;
+import com.quiz.repo.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -19,10 +22,15 @@ public class ProfileController {
     @Autowired
     private ResultRepository resultRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/profile")
     public String profile(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
-        if (user == null) return "redirect:/login";
+        if (user == null) {
+            return "redirect:/login";
+        }
 
         // Fetch results for this user
         List<Result> results = resultRepository.findByUser(user);
@@ -50,13 +58,33 @@ public class ProfileController {
         return "profile";
     }
 
+    // Handle update profile form
+    @PostMapping("/profile/update")
+    public String updateProfile(@ModelAttribute User updatedUser, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        // update fields
+        user.setUsername(updatedUser.getUsername());
+        user.setEmail(updatedUser.getEmail());
+        user.setCourse(updatedUser.getCourse());
+
+        // save
+        userRepository.save(user);
+
+        // refresh session
+        session.setAttribute("user", user);
+
+        return "redirect:/profile?success";
+    }
+
     // Inner DTO for profile stats
     public static class StatsDTO {
-        @SuppressWarnings("FieldMayBeFinal")
+
         private int totalQuizzes;
-        @SuppressWarnings("FieldMayBeFinal")
         private double avgScore;
-        @SuppressWarnings("FieldMayBeFinal")
         private int highestScore;
 
         public StatsDTO(int totalQuizzes, double avgScore, int highestScore) {
@@ -65,8 +93,16 @@ public class ProfileController {
             this.highestScore = highestScore;
         }
 
-        public int getTotalQuizzes() { return totalQuizzes; }
-        public double getAvgScore() { return avgScore; }
-        public int getHighestScore() { return highestScore; }
+        public int getTotalQuizzes() {
+            return totalQuizzes;
+        }
+
+        public double getAvgScore() {
+            return avgScore;
+        }
+
+        public int getHighestScore() {
+            return highestScore;
+        }
     }
 }

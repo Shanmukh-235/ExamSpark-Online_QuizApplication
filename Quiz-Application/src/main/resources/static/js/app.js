@@ -170,3 +170,42 @@ fetch("/api/users/login", {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
 });
+
+// Load quiz options in dropdown
+        function loadLeaderboardQuizzes() {
+            fetch("/api/admin/quizzes")
+                .then(res => res.json())
+                .then(data => {
+                    const select = document.getElementById("quizSelect");
+                    select.innerHTML = "";
+                    data.forEach(quiz => {
+                        const option = document.createElement("option");
+                        option.value = quiz.id;
+                        option.textContent = quiz.title;
+                        select.appendChild(option);
+                    });
+                    if (data.length > 0) loadLeaderboard(data[0].id);
+                });
+        }
+
+        function loadLeaderboard(quizId) {
+            fetch(`/api/leaderboard/quiz/${quizId}`)
+                .then(res => res.json())
+                .then(data => {
+                    const tbody = document.getElementById("leaderboard-table");
+                    tbody.innerHTML = data.map(entry => `
+                        <tr>
+                            <td>${entry.user.username}</td>
+                            <td>${entry.score}</td>
+                            <td>${entry.totalMarks}</td>
+                        </tr>
+                    `).join("");
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadLeaderboardQuizzes();
+            document.getElementById("quizSelect").addEventListener("change", (e) => {
+                loadLeaderboard(e.target.value);
+            });
+        });
