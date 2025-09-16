@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Take Quiz</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <h2>ExamSpark⚡</h2>
+      <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/leaderboard">Leaderboard</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 th:text="${quiz.title}">Quiz Title</h1>
+    <p th:text="${quiz.category}">Category</p>
+
+    <div id="quiz-container" th:data-questions="${questions}" th:data-quiz-id="${quiz.id}">
+    </div>
+
+    <button id="nextBtn" class="btn">Next</button>
+    <button id="submitBtn" class="btn" style="display:none;">Submit Quiz</button>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let currentIndex = 0;
+      let answers = {};
+
+      const quizContainer = document.getElementById("quiz-container");
+      const nextBtn = document.getElementById("nextBtn");
+      const submitBtn = document.getElementById("submitBtn");
+
+      function renderQuestion() {
+        const q = questions[currentIndex];
+        quizContainer.innerHTML = `
+      <div class="card">
+        <h3>${currentIndex + 1}. ${q.questionText}</h3>
+        <label><input type="radio" name="answer" value="option1"> ${q.option1}</label>
+        <label><input type="radio" name="answer" value="option2"> ${q.option2}</label>
+        <label><input type="radio" name="answer" value="option3"> ${q.option3}</label>
+        <label><input type="radio" name="answer" value="option4"> ${q.option4}</label>
+      </div>
+    `;
+
+        nextBtn.style.display = currentIndex < questions.length - 1 ? "inline-block" : "none";
+        submitBtn.style.display = currentIndex === questions.length - 1 ? "inline-block" : "none";
+      }
+
+      function getSelectedAnswer() {
+        const selected = document.querySelector("input[name='answer']:checked");
+        return selected ? selected.value : null;
+      }
+
+      nextBtn.addEventListener("click", () => {
+        const answer = getSelectedAnswer();
+        if (!answer) {
+          alert("Please select an option!");
+          return;
+        }
+        answers[questions[currentIndex].id] = answer;
+        currentIndex++;
+        renderQuestion();
+      });
+
+      submitBtn.addEventListener("click", () => {
+        const answer = getSelectedAnswer();
+        if (answer) {
+          answers[questions[currentIndex].id] = answer;
+        }
+
+        fetch(`/api/quiz/${quizId}/submit`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ answers })
+        })
+          .then(res => res.json())
+          .then(result => {
+            quizContainer.innerHTML = `<h2>Your Score: ${result.score}/${result.totalMarks}</h2>`;
+            nextBtn.style.display = "none";
+            submitBtn.style.display = "none";
+          });
+      });
+
+      renderQuestion(); // load first question
+    });
+
+  </script>
+</body>
+
+</html>

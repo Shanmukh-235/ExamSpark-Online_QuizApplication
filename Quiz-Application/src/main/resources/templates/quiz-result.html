@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Results | ExamSpark⚡</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <h2>ExamSpark⚡</h2>
+      <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 th:text="${quiz.title}"></h1>
+    <h2>Results</h2>
+    <p>Congratulations <span th:text="${user.username}">User</span> 🎉</p>
+    <p>Your Score: <span th:text="${score}"></span> / <span th:text="${total}"></span></p>
+
+    <a href="/dashboard" class="btn">Back to Dashboard</a>
+  </main>
+</body>
+
+</html>

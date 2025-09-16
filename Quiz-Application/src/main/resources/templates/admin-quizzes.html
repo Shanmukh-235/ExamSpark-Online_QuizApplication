@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Quizzes</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h2>Manage Quizzes</h2>
+    <br>
+    <a href="/admin">⬅ Back to Dashboard</a>
+    <ul>
+        <li th:each="quiz : ${quizzes}">
+            <b th:text="${quiz.title}"></b> - <span th:text="${quiz.description}"></span>
+        </li>
+    </ul>
+</body>
+</html>

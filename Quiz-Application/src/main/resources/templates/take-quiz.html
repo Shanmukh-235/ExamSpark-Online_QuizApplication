@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${quiz.title}">Quiz Title</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav {
+            background: #007bff;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main.container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin: 0.5rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h2>ExamSpark⚡</h2>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 th:text="${quiz.title}">Quiz Title</h1>
+        <p th:text="${quiz.category}">Category</p>
+
+        <form th:action="@{'/quiz/' + ${quiz.id} + '/submit'}" method="post">
+
+            <div th:each="question, iterStat : ${questions}" class="card">
+                <h3 th:text="${iterStat.index + 1} + '. ' + ${question.questionText}">Question</h3>
+
+                <label>
+                    <input type="radio" th:name="'q' + ${question.id}" th:value="${question.optionA}" required>
+                    <span th:text="${question.optionA}">Option A</span>
+                </label>
+                <label>
+                    <input type="radio" th:name="'q' + ${question.id}" th:value="${question.optionB}">
+                    <span th:text="${question.optionB}">Option B</span>
+                </label>
+                <label>
+                    <input type="radio" th:name="'q' + ${question.id}" th:value="${question.optionC}">
+                    <span th:text="${question.optionC}">Option C</span>
+                </label>
+                <label>
+                    <input type="radio" th:name="'q' + ${question.id}" th:value="${question.optionD}">
+                    <span th:text="${question.optionD}">Option D</span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn">Submit Quiz</button>
+        </form>
+    </main>
+</body>
+
+</html>

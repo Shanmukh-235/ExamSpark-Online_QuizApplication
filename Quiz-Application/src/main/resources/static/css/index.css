@@ -1,0 +1,176 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #111; /* black base */
+  color: #fff;      /* white text */
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: #000;
+  border-bottom: 1px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.logo span {
+  color: #aaa; /* subtle contrast */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #ddd;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+.btn-nav {
+  background: #fff;
+  color: #000 !important;
+  padding: 8px 18px;
+  border-radius: 6px;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.btn-nav:hover {
+  background: #444;
+  color: #fff !important;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 60px;
+  background: linear-gradient(135deg, #000);
+  color: #fff;
+}
+
+.hero-content {
+  max-width: 50%;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 12px 28px;
+  background: #fff;
+  color: #000;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #ddd;
+}
+
+.btn-outline {
+  padding: 12px 28px;
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-outline:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* Hero Image */
+.hero-image img {
+  width: 340px;
+  margin-left: 180px;
+  /* filter: brightness(0) invert(1); /* make SVG look white in dark bg */
+  /*animation: float 4s ease-in-out infinite; */
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Features Section */
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 60px 20px;
+  background: #1a1a1a;
+  border-radius: 20px 20px 0 0;
+}
+
+.feature {
+  text-align: center;
+  max-width: 300px;
+  color: #eee;
+}
+
+.feature h2 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.feature p {
+  color: #bbb;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #000;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #888;
+}

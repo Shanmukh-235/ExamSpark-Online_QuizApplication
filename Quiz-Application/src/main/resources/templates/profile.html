@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExamSpark⚡ | Profile</title>
+  <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+  <!-- Shared Navbar -->
+  <header>
+    <nav>
+      <h2>ExamSpark⚡</h2>
+      <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/profile" class="active">Profile</a></li>
+        <li><a href="/leaderboard">Leaderboard</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p><strong>Username:</strong> <span th:text="${user.username}">User</span></p>
+    <p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
+
+    <!-- Stats Card -->
+    <div class="card stats-card">
+      <h2>📊 Statistics</h2>
+      <p><strong>Total Quizzes Taken:</strong> <span th:text="${stats.totalQuizzes}">0</span></p>
+      <p><strong>Average Score:</strong> <span th:text="${stats.avgScore}">0</span>%</p>
+      <p><strong>Highest Score:</strong> <span th:text="${stats.highestScore}">0</span></p>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ExamSpark⚡ | Leaderboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Shared Navbar -->
+    <header>
+        <nav>
+            <h2>ExamSpark⚡</h2>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/leaderboard" class="active">Leaderboard</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Leaderboard</h1>
+
+        <label for="quizSelect">Select Quiz:</label>
+        <select id="quizSelect"></select>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Score</th>
+                    <th>Total Marks</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-table">
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        // Load quiz options in dropdown
+        function loadLeaderboardQuizzes() {
+            fetch("/api/admin/quizzes")
+                .then(res => res.json())
+                .then(data => {
+                    const select = document.getElementById("quizSelect");
+                    select.innerHTML = "";
+                    data.forEach(quiz => {
+                        const option = document.createElement("option");
+                        option.value = quiz.id;
+                        option.textContent = quiz.title;
+                        select.appendChild(option);
+                    });
+                    if (data.length > 0) loadLeaderboard(data[0].id);
+                });
+        }
+
+        function loadLeaderboard(quizId) {
+            fetch(`/api/leaderboard/quiz/${quizId}`)
+                .then(res => res.json())
+                .then(data => {
+                    const tbody = document.getElementById("leaderboard-table");
+                    tbody.innerHTML = data.map(entry => `
+                        <tr>
+                            <td>${entry.user.username}</td>
+                            <td>${entry.score}</td>
+                            <td>${entry.totalMarks}</td>
+                        </tr>
+                    `).join("");
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadLeaderboardQuizzes();
+            document.getElementById("quizSelect").addEventListener("change", (e) => {
+                loadLeaderboard(e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamSpark⚡| Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li class="tab-link active" data-tab="users">👤 Users</li>
+            <li class="tab-link" data-tab="quizzes">📘 Quizzes</li>
+            <li class="tab-link" data-tab="questions">❓ Questions</li>
+            <li class="tab-link" data-tab="leaderboard">🏆 Leaderboard</li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Welcome, Admin</h1>
+
+        <!-- Users Section -->
+        <div id="users" class="tab-content active">
+            <h2>Manage Users</h2>
+            <form id="addUserForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <select id="role">
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+                <button type="submit">Add User</button>
+            </form>
+            <div id="users-list" class="list-container"></div>
+        </div>
+
+        <!-- Quizzes Section -->
+        <div id="quizzes" class="tab-content">
+            <h2>Manage Quizzes</h2>
+            <form id="addQuizForm">
+                <input type="text" id="quizTitle" placeholder="Quiz Title" required>
+                <input type="text" id="quizCategory" placeholder="Category (optional)">
+                <button type="submit">Add Quiz</button>
+            </form>
+            <div id="quizzes-list" class="list-container"></div>
+        </div>
+
+        <!-- Questions Section -->
+        <div id="questions" class="tab-content">
+            <h2>Manage Questions</h2>
+            <form id="addQuestionForm">
+                <input type="text" id="questionText" placeholder="Question" required>
+                <input type="text" id="optionA" placeholder="Option A" required>
+                <input type="text" id="optionB" placeholder="Option B" required>
+                <input type="text" id="optionC" placeholder="Option C" required>
+                <input type="text" id="optionD" placeholder="Option D" required>
+                <input type="text" id="answer" placeholder="Answer" required>
+                <select id="quizSelect"></select>
+                <button type="submit">Add Question</button>
+            </form>
+            <div id="questions-list" class="list-container"></div>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div id="leaderboard" class="tab-content">
+            <h2>Leaderboard</h2>
+            <select id="leaderboardQuizSelect"></select>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Score</th>
+                        <th>Total Marks</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-table"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+
+</html>

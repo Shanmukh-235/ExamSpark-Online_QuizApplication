@@ -1,0 +1,266 @@
+/* ========== RESET ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #111;
+    color: #f5f5f5;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+    width: 250px;
+    background: #000;
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.sidebar ul {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+    cursor: pointer;
+    color: #bbb;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li:hover {
+    background: #222;
+    color: #fff;
+}
+
+.sidebar ul li.active {
+    background: #333;
+    color: #fff;
+    border-left: 4px solid #fff;
+}
+
+/* ========== MAIN CONTENT ========== */
+.main-content {
+    margin-left: 250px;
+    padding: 30px;
+    flex: 1;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ========== FORMS ========== */
+form {
+    background: #000;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+form input,
+form select,
+form button {
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background: #111;
+    color: #f5f5f5;
+    transition: all 0.2s ease;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #fff;
+    outline: none;
+}
+
+form button {
+    background: #fff;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #ddd;
+}
+
+/* ========== LISTS ========== */
+.list-container {
+    display: grid;
+    gap: 15px;
+}
+
+.list-item {
+    background: #111;
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s ease;
+}
+
+.list-item:hover {
+    background: #181818;
+}
+
+.list-item h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.list-item p {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* ========== CARD ACTION BUTTONS ========== */
+.card-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.card-actions button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+/* Edit button */
+.card-actions .edit {
+    background: #fff;
+    color: #000;
+}
+
+.card-actions .edit:hover {
+    background: #ccc;
+}
+
+/* Delete button */
+.card-actions .delete {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.card-actions .delete:hover {
+    background: #c0392b;
+}
+
+/* ========== TABLES (Leaderboard) ========== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+table th,
+table td {
+    padding: 12px;
+    border: 1px solid #333;
+    text-align: left;
+}
+
+table th {
+    background: #000;
+    color: #fff;
+    font-weight: 600;
+}
+
+table tr:nth-child(even) {
+    background: #181818;
+}
+
+table tr:hover {
+    background: #222;
+}
+
+/* Style the label + select wrapper */
+label[for="quizSelect"] {
+  font-weight: 600;
+  margin-right: 10px;
+  color: #333;
+}
+
+/* Base style for select dropdown */
+#quizSelect, 
+#leaderboardQuizSelect {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  min-width: 200px;
+}
+
+/* Hover effect */
+#quizSelect:hover,
+#leaderboardQuizSelect:hover {
+  border-color: #666;
+}
+
+/* Focus effect */
+#quizSelect:focus,
+#leaderboardQuizSelect:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Dropdown options */
+#quizSelect option,
+#leaderboardQuizSelect option {
+  padding: 8px;
+  font-size: 14px;
+}

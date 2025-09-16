@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+
+    <main>
+        <!-- Admin Dashboard Tabs -->
+        <div class="admin-dashboard">
+            <ul class="tabs">
+                <li class="tab-link active" onclick="openTab('users')">Users</li>
+                <li class="tab-link" onclick="openTab('quizzes')">Quizzes</li>
+                <li class="tab-link" onclick="openTab('questions')">Questions</li>
+            </ul>
+
+            <!-- Users Section -->
+            <div id="users" class="tab-content active">
+                <h2>Users</h2>
+
+                <!-- Add User Form -->
+                <form id="addUserForm" onsubmit="addUser(event)">
+                    <input type="text" id="username" placeholder="Username" required>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <select id="role">
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                    <button type="submit">Add User</button>
+                </form>
+
+                <div id="users-list"></div>
+            </div>
+
+            <!-- Quizzes Section -->
+            <div id="quizzes" class="tab-content">
+                <h2>Quizzes</h2>
+
+                <!-- Add Quiz Form -->
+                <form id="addQuizForm" onsubmit="addQuiz(event)">
+                    <input type="text" id="quizTitle" placeholder="Quiz Title" required>
+                    <input type="text" id="quizCategory" placeholder="Category (optional)">
+                    <button type="submit">Add Quiz</button>
+                </form>
+
+                <div id="quizzes-list"></div>
+            </div>
+
+            <!-- Questions Section -->
+            <div id="questions" class="tab-content">
+                <h2>Questions</h2>
+
+                <!-- Add Question Form -->
+                <form id="addQuestionForm" onsubmit="addQuestion(event)">
+                    <input type="text" id="questionText" placeholder="Question" required>
+                    <input type="text" id="optionA" placeholder="Option A" required>
+                    <input type="text" id="optionB" placeholder="Option B" required>
+                    <input type="text" id="optionC" placeholder="Option C" required>
+                    <input type="text" id="optionD" placeholder="Option D" required>
+                    <input type="text" id="answer" placeholder="Answer" required>
+                    <select id="quizSelect"></select>
+                    <button type="submit">Add Question</button>
+                </form>
+
+                <div id="questions-list"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

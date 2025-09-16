@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Submitted</title>
+    <link rel="stylesheet" href="/css/success.css">
+    <script>
+        // Redirect to dashboard after 5 seconds
+        setTimeout(() => {
+            window.location.href = "/dashboard";
+        }, 5000);
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h2>ExamSpark⚡</h2>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/leaderboard">Leaderboard</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Quiz Submitted</h1>
+        <p th:text="'Quiz: ' + ${quiz.title}">Quiz: Quiz Name</p>
+        <p th:text="'Category: ' + ${quiz.category}">Category: Category Name</p>
+        <h2 th:text="'Your Score: ' + ${score} + ' / ' + ${total}">Your Score: 0/0</h2>
+
+        <p>Redirecting you to Dashboard in 5 seconds...</p>
+        <a href="/dashboard" class="btn">Go to Dashboard Now</a>
+    </main>
+</body>
+
+</html>

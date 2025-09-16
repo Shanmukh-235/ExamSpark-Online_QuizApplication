@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExamSpark⚡| User Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <h2>ExamSpark⚡</h2>
+      <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/leaderboard">Leaderboard</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Null-safe welcome message -->
+    <h1>
+      Welcome, 
+      <span th:text="${user != null ? user.username : 'Guest'}"></span> 🎉
+    </h1>
+
+    <h2 class="highlight">Available Quizzes</h2>
+
+    <!-- Null-safe quiz list -->
+    <div class="quiz-list">
+      <div th:if="${quizzes != null and !quizzes.isEmpty()}">
+        <div th:each="quiz : ${quizzes}" class="card">
+          <h3 th:text="${quiz.title}">Quiz Title</h3>
+          <p th:text="${quiz.category}">Category</p>
+          <a th:href="@{/quiz/{id}(id=${quiz.id})}" class="btn">Start Quiz</a>
+        </div>
+      </div>
+
+      <!-- Show message if no quizzes -->
+      <p th:if="${quizzes == null or quizzes.isEmpty()}">
+        No quizzes available at the moment.
+      </p>
+    </div>
+  </main>
+</body>
+</html>
