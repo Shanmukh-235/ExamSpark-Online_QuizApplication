@@ -5,7 +5,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <style>
+                body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h2 {
+            margin-top: 2rem;
+            color: #4dabf7;
+            text-shadow: 0 0 8px rgba(77, 171, 247, 0.6);
+        }
+
+        #results-container {
+            margin-top: 2rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .result-item {
+            background: #2a2a2a;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-radius: 6px;
+            border: 1px solid #2c2c2c;
+            transition: background 0.2s ease;
+        }
+
+        .result-item:hover {
+            background: #333333;
+        }
+
+        .highlight {
+            color: #4dabf7;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #4dabf7;
+            color: #121212;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #1c7ed6;
+            transform: translateY(-2px);
+        }
+    </style>
 
 </head>
 
