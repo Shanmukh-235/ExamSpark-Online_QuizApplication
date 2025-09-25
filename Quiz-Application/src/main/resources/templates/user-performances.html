@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Performances</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/performance.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <h2>ExamSpark⚡</h2>
+      <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/profile">Profile</a></li>
+         <li><a href="/user/performances">My Performance</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+<body>
+<div class="performance-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Quiz Name</th>
+                <th>Score</th>
+                <th>Total Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="attempt : ${attempts}">
+                <td th:text="${attempt.quiz.title}"></td>
+                <td th:text="${attempt.score}"></td>
+                <td th:text="${attempt.totalMarks}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

@@ -24,24 +24,36 @@
     <p class="highlight">Top performers ranked by total score</p>
 
     <!-- Leaderboard Table -->
-    <div class="leaderboard-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Total Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="entry, iterStat : ${leaderboard}">
-            <td th:text="${iterStat.index + 1}">1</td>
-            <td th:text="${entry.username}">JohnDoe</td>
-            <td th:text="${entry.totalScore}">120</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+
+<h2 class="highlight">Top Performers</h2>
+<div th:if="${leaderboard != null and !leaderboard.isEmpty()}">
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>User</th>
+        <th>Total Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="entry, iterStat : ${leaderboard}">
+        <td th:text="${iterStat.index + 1}"></td>
+        <td th:text="${entry['username']}"></td>
+        <td th:text="${entry['totalScore']}"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p th:if="${leaderboard == null or leaderboard.isEmpty()}">
+  No leaderboard data available yet.
+</p>
+
+
+<p th:if="${leaderboard == null or leaderboard.isEmpty()}">
+  No leaderboard data available yet.
+</p>
+
 
     <!-- Show message if leaderboard is empty -->
     <p th:if="${leaderboard == null or leaderboard.isEmpty()}">

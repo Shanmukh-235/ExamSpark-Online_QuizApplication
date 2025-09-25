@@ -15,13 +15,8 @@ public class LeaderboardPageController {
 
     @GetMapping("/leaderboard")
     public String leaderboardPage(Model model) {
-        // fetch all records sorted by score
-        var topScores = leaderboardRepository.findAll()
-                .stream()
-                .sorted((a, b) -> Integer.compare(b.getScore(), a.getScore()))
-                .limit(10)
-                .toList();
-
+        // Fetch top 10 by score directly from repository
+        var topScores = leaderboardRepository.findTop10ByOrderByScoreDesc();
         model.addAttribute("topScores", topScores);
         return "leaderboard"; // Thymeleaf template
     }
