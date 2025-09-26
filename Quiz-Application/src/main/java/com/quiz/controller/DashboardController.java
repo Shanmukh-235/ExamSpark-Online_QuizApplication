@@ -41,7 +41,8 @@ public class DashboardController {
         }
 
         // Fetch quizzes matching user course OR common
-        List<Quiz> quizzes = quizRepository.findByCategoryIn(List.of(user.getCourse(), "Common"));
+        List<Quiz> quizzes = quizRepository.findByCategoryIn(List.of(user.getCourse(), "Common", "General"));
+        
 
         // Fetch leaderboard (aggregate scores)
         List<Object[]> rawLeaderboard = leaderboardRepository.findUserTotalScores();
