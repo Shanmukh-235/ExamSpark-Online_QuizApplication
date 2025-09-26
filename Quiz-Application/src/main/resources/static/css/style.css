@@ -31,6 +31,11 @@ header {
 header h2 {
   font-size: 1.6rem;
   letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+span {
+  color: #aaa;
 }
 
 nav ul {

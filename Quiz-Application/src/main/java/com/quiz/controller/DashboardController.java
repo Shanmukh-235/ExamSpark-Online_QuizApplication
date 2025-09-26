@@ -91,4 +91,10 @@ public class DashboardController {
 
         return "user-performances"; // this will be a new Thymeleaf template
     }
+
+    // @GetMapping("/logout")
+    // public String logout(HttpSession session) {
+    //     session.invalidate();  // clear user session
+    //     return "redirect:/";   // redirect to index 
+    // }
 }

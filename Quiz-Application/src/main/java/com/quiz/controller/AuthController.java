@@ -80,10 +80,10 @@ public class AuthController {
         return "login";
     }
 
-    // Logout
+    ///Logout
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/login"; // fixed
+        return "redirect:/"; // go back to index instead of login
     }
 }
