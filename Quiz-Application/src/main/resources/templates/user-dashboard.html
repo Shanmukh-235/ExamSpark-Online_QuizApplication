@@ -1,48 +1,92 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ExamSpark⚡| User Dashboard</title>
+  <title>ExamSpark⚡ | User Dashboard</title>
+
+  <!-- Tailwind for grid -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    /* Restore ExamSpark heading */
+    header h2 {
+      font-size: 1.6rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 1px !important;
+    }
+
+    header h2 span {
+      color: #aaa !important;
+      font-weight: 600 !important;
+    }
+
+    /* Restore Welcome heading */
+    main.container h1 {
+      font-size: 2rem !important;
+      font-weight: 700 !important;
+      line-height: 1.2 !important;
+      margin-bottom: 15px;
+    }
+  </style>
+
+
 </head>
+
 <body>
+
+  <!-- Navbar -->
   <header>
     <nav>
       <h2>Exam<span>Spark⚡</span></h2>
       <ul>
         <li><a href="/dashboard">Dashboard</a></li>
         <li><a href="/profile">Profile</a></li>
-         <li><a href="/user/performances">My Performance</a></li>
+        <li><a href="/user/performances">My Performance</a></li>
         <li><a href="/logout">Logout</a></li>
       </ul>
     </nav>
   </header>
 
+  <!-- Main Content -->
   <main class="container">
-    <!-- Null-safe welcome message -->
+
     <h1>
-      Welcome, 
+      Welcome,
       <span th:text="${user != null ? user.username : 'Guest'}"></span> 🎉
     </h1>
 
     <h2 class="highlight">Available Quizzes</h2>
 
-    <!-- Null-safe quiz list -->
-    <div class="quiz-list">
-      <div th:if="${quizzes != null and !quizzes.isEmpty()}">
-        <div th:each="quiz : ${quizzes}" class="card">
+    <!-- Quiz Grid: 3 per row -->
+    <div class="mt-6">
+      <div th:if="${quizzes != null and !quizzes.isEmpty()}"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Quiz Card -->
+        <div th:each="quiz : ${quizzes}" class="card bg-[#1c1c1c] border border-[#333] rounded-lg p-5 text-center 
+            hover:shadow-lg hover:shadow-white/10 transition">
+
           <h3 th:text="${quiz.title}">Quiz Title</h3>
           <p th:text="${quiz.category}">Category</p>
+
           <a th:href="@{/quiz/{id}(id=${quiz.id})}" class="btn">Start Quiz</a>
+
         </div>
+
+
       </div>
 
-      <!-- Show message if no quizzes -->
-      <p th:if="${quizzes == null or quizzes.isEmpty()}">
+      <!-- If no quizzes -->
+      <p th:if="${quizzes == null or quizzes.isEmpty()}" class="text-gray-400 mt-4">
         No quizzes available at the moment.
       </p>
     </div>
+
   </main>
+
 </body>
+
 </html>
